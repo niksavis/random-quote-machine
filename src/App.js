@@ -18,11 +18,9 @@ function App() {
     const response = await fetch(url);
     const parsedJSON = await response.json();
     setQuotesArray(parsedJSON.quotes);
-  }
+  };
 
-  useEffect(() => {
-    fetchQuotes(quotesUrl)
-  })
+  useEffect(() => { fetchQuotes(quotesUrl) });
 
   const getRandomQuote = () => {
     let randomInteger = Math.floor(quotesArray.length * Math.random());
