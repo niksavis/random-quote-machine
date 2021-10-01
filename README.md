@@ -1,5 +1,5 @@
-# This is a random quote machine for freeCodeCamp front end library certification
+# Random Quote Machine
 
- <https://www.freecodecamp.org/learn/front-end-development-libraries/front-end-development-libraries-projects/build-a-random-quote-machine>
+This is an implementation of a random quote machine for [freeCodeCamp](https://www.freecodecamp.org/) front end library certification based on React.
 
-Based on the following video tutorial: <https://www.youtube.com/watch?v=EDWwhVoCvHM>
+For more info visit the [freeCodeCamp challenge page](https://www.freecodecamp.org/learn/front-end-development-libraries/front-end-development-libraries-projects/build-a-random-quote-machine).
