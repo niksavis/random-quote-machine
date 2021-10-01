@@ -4,8 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faQuoteLeft, faQuoteRight } from '@fortawesome/free-solid-svg-icons';
 import COLORS_ARRAY from './colorsArray';
-
-const quotesUrl = 'https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json';
+import quotesDB from './quotes.json';
 
 function App() {
   const [quote, setQuote] = useState(
@@ -13,32 +12,39 @@ function App() {
   );
   const [author, setAuthor] = useState('Cyril N. Parkinson');
   const [quotesArray, setQuotesArray] = useState(null);
-  const [accentColor, setAccentColor] = useState('#282c34');
-
-  const fetchQuotes = async (url) => {
-    const response = await fetch(url);
-    const parsedJSON = await response.json();
-    setQuotesArray(parsedJSON.quotes);
-  };
+  const [txtColor, setTextColor] = useState('#282c34');
+  const [bgColor, setBackgroundColor] = useState('#282c34');
+  const [btColor, setButtonColor] = useState('#282c34');
+  const [bounce, setBounce] = useState(false);
 
   useEffect(() => {
-    fetchQuotes(quotesUrl);
+    setQuotesArray(quotesDB.quotes);
   });
 
+  const animate = () => {
+    setBounce(true);
+    setTimeout(() => setBounce(false), 2000);
+  };
+
   const getRandomQuote = () => {
-    const randomInteger = Math.floor(quotesArray.length * Math.random());
-    setAccentColor(COLORS_ARRAY[randomInteger]);
-    setQuote(quotesArray[randomInteger].quote);
-    setAuthor(quotesArray[randomInteger].author);
+    const randomNumberAccent = Math.floor(quotesArray.length * Math.random());
+    const randomNumberBackground = Math.floor(quotesArray.length * Math.random());
+    const randomNumberButtons = Math.floor(quotesArray.length * Math.random());
+    setTextColor(COLORS_ARRAY[randomNumberAccent]);
+    setBackgroundColor(COLORS_ARRAY[randomNumberBackground]);
+    setButtonColor(COLORS_ARRAY[randomNumberButtons]);
+    setQuote(quotesArray[randomNumberButtons].quote);
+    setAuthor(quotesArray[randomNumberButtons].author);
+    animate();
   };
 
   return (
     <div className="App">
       <header
         className="App-header"
-        style={{ backgroundColor: accentColor, color: accentColor }}
+        style={{ backgroundColor: bgColor, color: txtColor }}
       >
-        <div id="quote-box" style={{ color: accentColor }}>
+        <div id="quote-box" className={bounce ? 'bounce' : null} style={{ color: txtColor }}>
           <h2 id="text">
             <span id="quote-icon">
               <FontAwesomeIcon icon={faQuoteLeft} />
@@ -56,7 +62,7 @@ function App() {
           <div className="buttons">
             <a
               id="tweet-quote"
-              style={{ backgroundColor: accentColor }}
+              style={{ backgroundColor: btColor }}
               href={encodeURI(
                 `https://www.twitter.com/intent/tweet?text=${quote} -${author}`,
               )}
@@ -66,10 +72,11 @@ function App() {
             <button
               type="button"
               id="new-quote"
-              style={{ backgroundColor: accentColor }}
+              style={{ backgroundColor: btColor }}
               onClick={() => getRandomQuote()}
+              disabled={bounce}
             >
-              New Quote
+              <b>New Quote</b>
             </button>
           </div>
         </div>

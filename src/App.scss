@@ -9,6 +9,20 @@ $border-radius: 10px;
   }
 }
 
+.bounce {
+  animation: bounce 2s;
+  animation-timing-function: cubic-bezier(0.280, 0.840, 0.420, 3);
+}
+@keyframes bounce {
+  0%   { transform: scale(1,0)      translateY(0); }
+  10%  { transform: scale(.95,.95)   translateY(0); }
+  30%  { transform: scale(.95,1.0)   translateY(-100px); }
+  50%  { transform: scale(1.0,.95) translateY(0); }
+  57%  { transform: scale(1,1)      translateY(-10px); }
+  64%  { transform: scale(1,1)      translateY(0); }
+  100% { transform: scale(1,1)      translateY(0); }
+}
+
 .App {
   text-align: center;
   #quote-box {
@@ -19,7 +33,7 @@ $border-radius: 10px;
 
     #text {
       margin-bottom: 0px;
-      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
       #quote-icon {
         margin-right: 10px;
       }
